@@ -12,7 +12,6 @@
 void yyerror(const char *s);
 int yylex(void);
 
-
 Command cmdLine;
 SimpleCommand *simpleCmd;
 %}
@@ -28,10 +27,10 @@ SimpleCommand *simpleCmd;
 %%
 
 goal:   NEWLINE {
-            cmdLine.prompt();
+            // cmdLine.prompt();
         }
         |goal NEWLINE {
-            cmdLine.prompt();
+            // cmdLine.prompt();
         }
         | goal command_line
         | command_line        
@@ -40,7 +39,7 @@ goal:   NEWLINE {
 command_line:   pipe_list io_list background_opt NEWLINE {
                     // cmdLine.print();
                     cmdLine.execute1();
-                    cmdLine.prompt();
+                    // cmdLine.prompt();
                     cmdLine.clear();
                 }
                 ;
@@ -110,6 +109,6 @@ int main(void) {
     // clear screen
     signal(SIGINT, catch_int);
     system("@cls|clear");
-    cmdLine.prompt();
+    // cmdLine.prompt();
     yyparse();
 }

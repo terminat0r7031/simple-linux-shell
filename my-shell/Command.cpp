@@ -9,9 +9,9 @@ Command::Command() {
     outFile = 0;
     background = 0;
 
-    pathSize = 500;
-    currentDir = (char *) malloc(pathSize * sizeof(char));
-    getcwd(currentDir, pathSize);
+    // pathSize = 500;
+    // currentDir = (char *) malloc(pathSize * sizeof(char));
+    // getcwd(this->currentDir, pathSize);
 }
 
 void Command::insertSimpleCommand(SimpleCommand *simpleCommand) {
@@ -37,10 +37,10 @@ void Command::setBackgroundOpt(unsigned int opt) {
     background = opt;
 }
 
-void Command::prompt() {
-    printf("my-shell:%s > ", currentDir);
-    fflush(stdin);
-}
+// void Command::prompt() {
+//     printf("my-shell:%s > ", currentDir);
+//     fflush(stdin);
+// }
 void Command::print() {
     printf("\n\n");
     printf("                COMMAND TABLE                   ");
@@ -202,7 +202,7 @@ void Command::cdFunc(char *path) {
     }
     else {
         if(chdir(path) == 0) {      // on success, change the currentDir property to path
-            getcwd(currentDir, pathSize);
+            // getcwd(currentDir, pathSize);
         } else {
             printf("cd: %s: No such file or directory\n", path);
         }

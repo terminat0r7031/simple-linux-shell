@@ -77,11 +77,10 @@
 void yyerror(const char *s);
 int yylex(void);
 
-
 Command cmdLine;
 SimpleCommand *simpleCmd;
 
-#line 85 "y.tab.c" /* yacc.c:339  */
+#line 84 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -141,11 +140,11 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 21 "my-shell.y" /* yacc.c:355  */
+#line 20 "my-shell.y" /* yacc.c:355  */
 
     char *string_val;
 
-#line 149 "y.tab.c" /* yacc.c:355  */
+#line 148 "y.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -162,7 +161,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 166 "y.tab.c" /* yacc.c:358  */
+#line 165 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -460,8 +459,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    30,    30,    33,    36,    37,    40,    48,    49,    52,
-      57,    63,    66,    76,    79,    80,    83,    86,    91,    94
+       0,    29,    29,    32,    35,    36,    39,    47,    48,    51,
+      56,    62,    65,    75,    78,    79,    82,    85,    90,    93
 };
 #endif
 
@@ -1240,59 +1239,59 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 30 "my-shell.y" /* yacc.c:1646  */
+#line 29 "my-shell.y" /* yacc.c:1646  */
     {
-            cmdLine.prompt();
+            // cmdLine.prompt();
         }
-#line 1248 "y.tab.c" /* yacc.c:1646  */
+#line 1247 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 33 "my-shell.y" /* yacc.c:1646  */
+#line 32 "my-shell.y" /* yacc.c:1646  */
     {
-            cmdLine.prompt();
+            // cmdLine.prompt();
         }
-#line 1256 "y.tab.c" /* yacc.c:1646  */
+#line 1255 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 40 "my-shell.y" /* yacc.c:1646  */
+#line 39 "my-shell.y" /* yacc.c:1646  */
     {
                     // cmdLine.print();
                     cmdLine.execute1();
-                    cmdLine.prompt();
+                    // cmdLine.prompt();
                     cmdLine.clear();
                 }
-#line 1267 "y.tab.c" /* yacc.c:1646  */
+#line 1266 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 52 "my-shell.y" /* yacc.c:1646  */
+#line 51 "my-shell.y" /* yacc.c:1646  */
     {
                     cmdLine.insertSimpleCommand(simpleCmd);
                 }
-#line 1275 "y.tab.c" /* yacc.c:1646  */
+#line 1274 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 57 "my-shell.y" /* yacc.c:1646  */
+#line 56 "my-shell.y" /* yacc.c:1646  */
     {
                     simpleCmd = new SimpleCommand();
                     simpleCmd->insertArgument((yyvsp[0].string_val));
                 }
-#line 1284 "y.tab.c" /* yacc.c:1646  */
+#line 1283 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 63 "my-shell.y" /* yacc.c:1646  */
+#line 62 "my-shell.y" /* yacc.c:1646  */
     {
                 simpleCmd->insertArgument((yyvsp[0].string_val));
             }
-#line 1292 "y.tab.c" /* yacc.c:1646  */
+#line 1291 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 66 "my-shell.y" /* yacc.c:1646  */
+#line 65 "my-shell.y" /* yacc.c:1646  */
     {
                 // remove double quote
                 char *tmp = (yyvsp[0].string_val);
@@ -1303,35 +1302,35 @@ yyreduce:
                 tmp[i-1] = '\0';
                 simpleCmd->insertArgument(tmp);
             }
-#line 1307 "y.tab.c" /* yacc.c:1646  */
+#line 1306 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 83 "my-shell.y" /* yacc.c:1646  */
+#line 82 "my-shell.y" /* yacc.c:1646  */
     {
                     cmdLine.setOutFile((yyvsp[0].string_val));
                 }
-#line 1315 "y.tab.c" /* yacc.c:1646  */
+#line 1314 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 86 "my-shell.y" /* yacc.c:1646  */
+#line 85 "my-shell.y" /* yacc.c:1646  */
     {
                     cmdLine.setInFile((yyvsp[0].string_val));
                 }
-#line 1323 "y.tab.c" /* yacc.c:1646  */
+#line 1322 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 91 "my-shell.y" /* yacc.c:1646  */
+#line 90 "my-shell.y" /* yacc.c:1646  */
     {
                     cmdLine.setBackgroundOpt(1);
                 }
-#line 1331 "y.tab.c" /* yacc.c:1646  */
+#line 1330 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1335 "y.tab.c" /* yacc.c:1646  */
+#line 1334 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1559,7 +1558,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 97 "my-shell.y" /* yacc.c:1906  */
+#line 96 "my-shell.y" /* yacc.c:1906  */
 
 
 sig_atomic_t sigFlag = 0;
@@ -1576,6 +1575,6 @@ int main(void) {
     // clear screen
     signal(SIGINT, catch_int);
     system("@cls|clear");
-    cmdLine.prompt();
+    // cmdLine.prompt();
     yyparse();
 }

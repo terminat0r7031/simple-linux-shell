@@ -15,7 +15,6 @@
 
 #include "SimpleCommand.h"
 
-
 class Command {
 
     private:
@@ -26,8 +25,8 @@ class Command {
         char *inFile;
         unsigned int background;
         
-        char *currentDir ;
-        unsigned long pathSize;
+        // char *currentDir;
+        // unsigned long pathSize;
 
         char const *buildInCommands[3] = {"cd", "exit", "owbtitle"};
         unsigned int numberOfAvailabelBuildInCommands = 3;
@@ -45,7 +44,7 @@ class Command {
         void setOutFile(char *outFileName);
         void setBackgroundOpt(unsigned int opt);
 
-        void prompt();
+        // void prompt();
         void print();
         void execute();
         void execute1();

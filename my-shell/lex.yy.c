@@ -475,9 +475,40 @@ char *yytext;
 #line 1 "my-shell.l"
 #line 2 "my-shell.l"
 #include "y.tab.h"
+#include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
+
 int yylex();
-#line 481 "lex.yy.c"
+#define YY_INPUT(buf, result, max_size) result = mygetinput(buf, max_size);
+
+int pathSize = 500;
+char *currentDir = (char *) malloc(pathSize * sizeof(char));
+char *prompt = (char *)malloc(pathSize * 2 * sizeof(char));
+
+static int mygetinput(char *buf, int size) {
+    char *line;
+    if(feof(yyin)) return YY_NULL;
+    getcwd(currentDir, pathSize);
+    snprintf(prompt, 1000, "my-shell:%s > ", currentDir);
+    line = readline(prompt);
+    if(!line)
+        return YY_NULL;
+    if(strlen(line) > size-2) {
+        fprintf(stderr, "input line too long\n");
+        return YY_NULL;
+    }
+    add_history(line);
+    strcpy(buf, line);
+    int len = strlen(line);
+    buf[len] = '\n';
+    free(line);
+    return len + 1;
+}
+#line 512 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -695,10 +726,10 @@ YY_DECL
 		}
 
 	{
-#line 7 "my-shell.l"
+#line 38 "my-shell.l"
 
 
-#line 702 "lex.yy.c"
+#line 733 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -758,14 +789,14 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 9 "my-shell.l"
+#line 40 "my-shell.l"
 {
     return NEWLINE;
 }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 13 "my-shell.l"
+#line 44 "my-shell.l"
 {
     /* discard spaces and tabs  
      do nothing;
@@ -774,28 +805,28 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "my-shell.l"
+#line 50 "my-shell.l"
 {
     return GREAT;
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 23 "my-shell.l"
+#line 54 "my-shell.l"
 {
     return LESS;
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 27 "my-shell.l"
+#line 58 "my-shell.l"
 {
     return PIPE;
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 31 "my-shell.l"
+#line 62 "my-shell.l"
 {
     return AMPERSAND;
 }
@@ -803,7 +834,7 @@ YY_RULE_SETUP
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 35 "my-shell.l"
+#line 66 "my-shell.l"
 {
     /* string is encapsulated by double quote */
     yylval.string_val = strdup(yytext);
@@ -812,7 +843,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 41 "my-shell.l"
+#line 72 "my-shell.l"
 {
     /* word doesn't contain spaces, tabs, or linefeed */
     yylval.string_val = strdup(yytext);
@@ -821,10 +852,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 49 "my-shell.l"
+#line 80 "my-shell.l"
 ECHO;
 	YY_BREAK
-#line 828 "lex.yy.c"
+#line 859 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1825,7 +1856,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 49 "my-shell.l"
+#line 80 "my-shell.l"
 
 
 

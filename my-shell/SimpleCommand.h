@@ -2,6 +2,7 @@
 #define SIMPLECOMMAND_H
 
 #include <stdlib.h>
+
 class SimpleCommand {
     private:
         unsigned int numberOfAvailabelArguments;
