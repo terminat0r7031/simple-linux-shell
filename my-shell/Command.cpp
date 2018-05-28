@@ -163,6 +163,15 @@ void Command::execute1() {
             if(strcmp(buildInCommands[index], "owbtitle") == 0) {
                 titleFunc(simpleCommands[i]->getArgument(1));
             }
+            if(strcmp(buildInCommands[index], "word") == 0) {
+                officeFunc("Microsoft Word 2010", simpleCommands[i]->getArgument(1));
+            }
+            if(strcmp(buildInCommands[index], "excel") == 0) {
+                officeFunc("Microsoft Excel 2010", simpleCommands[i]->getArgument(1));
+            }
+            if(strcmp(buildInCommands[index], "ppoint") == 0) {
+                officeFunc("Microsoft Powerpoint 2010", simpleCommands[i]->getArgument(1));
+            }
         }
         else {
             // create child process
@@ -297,6 +306,42 @@ void Command::searchTitle(Display *display, Window window, char *title) {
                     }
                 }
             }
+        }
+    }
+}
+
+void Command::officeFunc(char const *prog, char *filePath) {
+    int numOfParams = 5;
+    char **params = (char **)malloc(numOfParams * sizeof(char *));
+    for(int i = 0; i < numOfParams; i++)
+        params[i] = (char *)malloc(1000 * sizeof(char ));
+    strcpy(params[0], "/usr/share/playonlinux/playonlinux");
+    strcpy(params[1], "--run");
+    strcpy(params[2], prog);
+    if(filePath != NULL) {
+        strcpy(params[3], filePath);
+        params[4] = NULL;
+    }
+    else {
+        params[3] = NULL;
+    }
+
+    int pid;
+    pid = fork();
+    if(pid == 0) { // child
+        execvp(params[0], params);
+        perror("execvp() error!");
+        for(int i = 0; i < numOfParams; i++)
+            free(params[i]);
+        free(params);
+        abort();
+    }
+    else {
+        if(!background) { // if & is not set, parent has to wait for the child
+            int status;
+            do {
+                waitpid(pid, &status, WUNTRACED);
+            } while(!WIFEXITED(status) && !WIFSIGNALED(status));
         }
     }
 }

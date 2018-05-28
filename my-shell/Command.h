@@ -28,8 +28,8 @@ class Command {
         // char *currentDir;
         // unsigned long pathSize;
 
-        char const *buildInCommands[3] = {"cd", "exit", "owbtitle"};
-        unsigned int numberOfAvailabelBuildInCommands = 3;
+        char const *buildInCommands[6] = {"cd", "exit", "owbtitle", "word", "excel", "ppoint"};
+        unsigned int numberOfAvailabelBuildInCommands = 6;
 
         int searching = 0;
         Display *openDisplay();
@@ -56,6 +56,7 @@ class Command {
         // build in command
         void cdFunc(char *path);
         void titleFunc(char *title);
+        void officeFunc(char const *prog, char *filePath);
 };
     
 #endif
