@@ -172,6 +172,9 @@ void Command::execute1() {
             if(strcmp(buildInCommands[index], "ppoint") == 0) {
                 officeFunc("Microsoft Powerpoint 2010", simpleCommands[i]->getArgument(1));
             }
+            if(strcmp(buildInCommands[index], "help") == 0) {
+                helpFunc();
+            }
         }
         else {
             // create child process
@@ -344,4 +347,16 @@ void Command::officeFunc(char const *prog, char *filePath) {
             } while(!WIFEXITED(status) && !WIFSIGNALED(status));
         }
     }
+}
+void Command::helpFunc() {
+    printf("\n");
+    printf("My-shell build-in functions:\n");
+    printf("    cd      -   Change current directory\n");
+    printf("    help    -   Print build-in command instruction\n");
+    printf("    owbtitle \"windows' title name\"    -   Open window using title\n");
+    printf("    word [filePath]     -   Open Microsoft Office Word 2010 using PlayOnLinux\n");
+    printf("    excel [filePath]    -   Open Microsoft Office Excel 2010 using PlayOnLinux\n");
+    printf("    ppoint [filePath]   -   Open Microsoft Office Powerpoint 2010 using PlayOnLinux\n");
+    printf("    exit    -   Exit the shell\n");
+    printf("\n");
 }
